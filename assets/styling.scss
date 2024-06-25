@@ -1,0 +1,99 @@
+
+// fonts
+
+@font-face {
+    font-family: 'PublicSans-Regular';
+    src: url('/public/fonts/PublicSans-Regular.ttf') format('truetype');
+} 
+
+@font-face {
+    font-family: 'PublicSans-Medium';
+    src: url('/public/fonts/PublicSans-Medium.ttf') format('truetype');
+} 
+
+@font-face {
+    font-family: 'PublicSans-Bold';
+    src: url('/public/fonts/PublicSans-Bold.ttf') format('truetype');
+} 
+
+@font-face {
+    font-family: 'PublicSans-SemiBold';
+    src: url('/public/fonts/PublicSans-SemiBold.ttf') format('truetype');
+} 
+
+
+@font-face {
+    font-family: 'PublicSans-ExtraBold';
+    src: url('/public/fonts/PublicSans-ExtraBold.ttf') format('truetype');
+} 
+
+@font-face {
+    font-family: 'PublicSans-Italic';
+    src: url('/public/fonts/PublicSans-Italic.ttf') format('truetype');
+} 
+
+
+
+@font-face {
+    font-family: 'PublicSans-MediumItalic';
+    src: url('/public/fonts/PublicSans-MediumItalic.ttf') format('truetype');
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$P-Regular:"PublicSans-Regular";
+$P-Medium:"PublicSans-Medium";
+$P-SemiBold:"PublicSans-SemiBold";
+$P-Bold:"PublicSans-Bold";
+$P-ExtraBold:"PublicSans-ExtraBold";
+$P:"PublicSans-Italic";
+$M-Italic:"PublicSans-MediumItalic";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// colors 
+$primary:#E6255B;
+$secondary:#272727;
+$accent:#EAA8A8;
+$forground:#373737;
+$text-white-50:#D9D9D9;
+$text-white-100:#A8A8AB;
+$text-white-200:#FAF9F6;
+$text-white-250:#FFFFFF;
+
+
+//sizes 
+$element-size: 2rem;
+
+
+
