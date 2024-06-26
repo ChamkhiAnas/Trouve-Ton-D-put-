@@ -1,8 +1,8 @@
 <template>
 
-    <div class="footer">
+    <div class="footer-section">
 
-        <div class="hero-section max-w-4xl m-0 m-auto flex flex-col  gap-10  justify-center items-center w-full">
+        <div class=" max-w-4xl m-0 m-auto flex flex-col  gap-10  justify-center items-center w-full">
         
 
 
@@ -57,9 +57,8 @@
 <style lang="scss" scoped>
 @use "~/assets/styling.scss";
 
-.footer{
+.footer-section{
   background-color: $forground;
-  position: absolute;
   bottom: 0;
   width: 100%;
   padding: 20px; /* Adjust padding as needed */

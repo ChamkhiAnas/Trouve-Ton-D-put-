@@ -10,6 +10,9 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        'xs': '400px',   // Define the 'xs' breakpoint
+      },
       colors:{
         textWhite50:'#D9D9D9',
         textWhite100:'#A8A8AB',

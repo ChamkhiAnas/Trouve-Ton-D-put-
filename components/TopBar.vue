@@ -36,6 +36,7 @@
         background-color: $primary;
         background-image: url("../public/Pattern.webp");
         background-position: center;
+        position: relative;
 
         background-blend-mode: luminosity;
 
