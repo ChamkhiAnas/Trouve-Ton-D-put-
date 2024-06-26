@@ -8,8 +8,8 @@
                 <div class=" flex justify-between items-center p-4 w-full">
                     <h1>Questions</h1>
 
-                    <div class="radialProgressBar progress-80">
-                        <div class="overlay flex justify-center gap-1 items-center"><span>8 sur</span> 10</div>
+                    <div class="radialProgressBar progress-10">
+                        <div class="overlay flex justify-center gap-1 items-center"><span>{{parentIndex }} sur</span> 10</div>
                     </div>
 
 
@@ -24,6 +24,19 @@
     
     
 </template>
+
+
+<script setup>
+
+const props = defineProps(['parentIndex'])
+
+const {parentIndex} = toRefs(props)
+
+
+
+
+
+</script>
 
 
 

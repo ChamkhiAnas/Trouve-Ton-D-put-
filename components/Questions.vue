@@ -4,17 +4,18 @@
     <div class="question max-w-6xl m-0 m-auto pt-8">
 
         <div class="badge-type-question max-w-7xl py-2 px-6 ml-4">
-            <p>Démocratie</p>
+            <p>{{ questions.value.records[index].fields.Thème }}</p>
         </div>
+
 
         <img class="m-0 m-auto mt-10 w-64" src="../public/Illustration.svg" alt="">
 
 
-        <h1 class="px-4 mt-10">Êtes-vous favorable au Référendum d'Initiative Citoyenne (RIC) ?</h1>
+        <h1 class="px-4 mt-10">{{ questions.value.records[index].fields.Question }}</h1>
 
         <div class="swipe-btns px-1 sm:px-2 mt-10  pb-6 flex justify-center items-center  gap-1 xs:gap-4 sm:gap-8">
 
-                <div :style="{ backgroundColor: bgColorSucces }" @click="changeColorSucces('#1C4920')" class="controll-btn cursor-pointer px-6 max-h-24 h-fit  sm:px-8 py-2  flex gap-2 justify-center items-center flex-wrap">
+                <div :style="{ backgroundColor: bgColorSucces }" @click="changeColorSucces('#1C4920');Like(questions.value.records[index].fields)" class="controll-btn cursor-pointer px-6 max-h-24 h-fit  sm:px-8 py-2  flex gap-2 justify-center items-center flex-wrap">
                     <label class="cursor-pointer">Pour</label>
                     <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M14 25.3333C20.2592 25.3333 25.3333 20.2592 25.3333 14C25.3333 7.74077 20.2592 2.66667 14 2.66667C7.74077 2.66667 2.66667 7.74077 2.66667 14C2.66667 20.2592 7.74077 25.3333 14 25.3333ZM28 14C28 21.732 21.732 28 14 28C6.26801 28 0 21.732 0 14C0 6.26801 6.26801 0 14 0C21.732 0 28 6.26801 28 14Z" fill="white"/>
@@ -28,12 +29,12 @@
                 </div>
 
 
-                <div :style="{ backgroundColor: bgNeutral }"  @click="changeColorNeutral('#cac9c9d9')" class="next-btn cursor-pointer flex justify-center  items-center px-4 py-4">
+                <div :style="{ backgroundColor: bgNeutral }"  @click="changeColorNeutral('#cac9c9d9');NextStep()" class="next-btn cursor-pointer flex justify-center  items-center px-4 py-4">
                     <label  class="cursor-pointer">Passer</label>
                 </div>
 
 
-                <div :style="{ backgroundColor: bgColorError }"  @click="changeColorError('#7D1A1A')" @mousedown="changeColorError('#7D1A1A')" @mouseup="changeColorError('#7D1A1A')" class="controll-btn cursor-pointer px-6 max-h-24 h-fit sm:px-8  py-2 flex gap-2 justify-center items-center flex-wrap ">
+                <div :style="{ backgroundColor: bgColorError }"  @click="changeColorError('#7D1A1A');Dislike(questions.value.records[index].fields)" @mousedown="changeColorError('#7D1A1A')" @mouseup="changeColorError('#7D1A1A')" class="controll-btn cursor-pointer px-6 max-h-24 h-fit sm:px-8  py-2 flex gap-2 justify-center items-center flex-wrap ">
                     <label class="cursor-pointer">Contre</label>
                     <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M14 25.3333C20.2592 25.3333 25.3333 20.2592 25.3333 14C25.3333 7.74077 20.2592 2.66667 14 2.66667C7.74077 2.66667 2.66667 7.74077 2.66667 14C2.66667 20.2592 7.74077 25.3333 14 25.3333ZM28 14C28 21.732 21.732 28 14 28C6.26801 28 0 21.732 0 14C0 6.26801 6.26801 0 14 0C21.732 0 28 6.26801 28 14Z" fill="white"/>
@@ -58,11 +59,134 @@
 <script setup>
 
 
+const props = defineProps(['data','parentIndex'])
+const emit = defineEmits(['sendIndex'])
+
+
+
+const questions=ref({})
+
+const index=ref(props.parentIndex)
+
+const maxlength=ref(0)
+
+questions.value=props.data
+
+
+console.log("index",index.value)
+
+
+
+
+
+
+console.log("questions value",questions.value.value.records[index.value])
+
+
+maxlength.value=questions.value.value.records.length
+
+
+console.log("max length",maxlength.value.length)
+
+
 const bgColorError=ref('#373737')
 
 const bgColorSucces=ref('#373737')
 
 const bgNeutral=ref('white')
+
+
+const parties=ref([{
+    "NFP":0,
+    "RN": 0,
+    "EN": 0,
+    "LR": 0,    
+}])
+
+
+const array=ref([])
+
+if (typeof window !== 'undefined') {
+localStorage.setItem('Parties', JSON.stringify(parties.value));
+localStorage.setItem('QuestionsList', JSON.stringify(array.value));
+}
+
+
+
+const NextStep=async()=>{
+    index.value<maxlength.value ? index.value+=1 : ""
+    emit('sendIndex',index.value)
+}
+
+ 
+
+
+const Like=async(Obj)=>{
+
+    Obj["Status"] = "Like";
+    console.log("Obj",Obj);
+
+
+
+
+    let Parties = JSON.parse(localStorage.getItem('Parties')) || [];
+    let array = JSON.parse(localStorage.getItem('QuestionsList')) || [];
+
+
+    Obj["Partis en accord"].includes("NFP") ? Parties[0].NFP+=1 : "";
+    Obj["Partis en accord"].includes("RN") ? Parties[0].RN+=1: "";
+    Obj["Partis en accord"].includes("EN") ? Parties[0].EN+=1 : "";
+    Obj["Partis en accord"].includes("LR") ? Parties[0].LR+=1: "";
+
+
+    console.log("parties",Parties[0]);
+    
+    array.push(Obj);
+
+    await localStorage.setItem('QuestionsList', JSON.stringify(array));
+    await localStorage.setItem('Parties', JSON.stringify(Parties));
+
+
+    NextStep();
+
+
+}
+
+
+ 
+const Dislike=async(Obj)=>{
+
+    Obj["Status"] = "Dislike";
+    console.log("Obj",Obj);
+
+    let Parties = JSON.parse(localStorage.getItem('Parties')) || [];
+    let array = JSON.parse(localStorage.getItem('QuestionsList')) || [];
+
+
+    Obj["Partis en désaccord"].includes("NFP") ? Parties[0].NFP+=1 : "";
+    Obj["Partis en désaccord"].includes("RN") ? Parties[0].RN+=1: "";
+    Obj["Partis en désaccord"].includes("EN") ? Parties[0].EN+=1 : "";
+    Obj["Partis en désaccord"].includes("LR") ? Parties[0].LR+=1: "";
+
+
+
+    array.push(Obj);
+
+    await localStorage.setItem('QuestionsList', JSON.stringify(array));
+    await localStorage.setItem('Parties', JSON.stringify(Parties));
+
+
+    NextStep();
+
+
+
+}
+
+
+
+
+
+
 
 
 const changeColorSucces=async (value)=>{
