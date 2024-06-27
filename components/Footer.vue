@@ -78,6 +78,7 @@ const changeIndex=(value)=>{
   background-color: $forground;
   bottom: 0;
   width: 100%;
+  max-height: 5rem;
   padding: 20px; /* Adjust padding as needed */
 }
 

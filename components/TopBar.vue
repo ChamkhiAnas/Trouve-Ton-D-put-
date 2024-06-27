@@ -8,7 +8,25 @@
                 <div class=" flex justify-between items-center p-4 w-full">
                     <h1>Questions</h1>
 
-                    <div class="radialProgressBar progress-10">
+                    <div class="radialProgressBar" 
+
+                    :class="{
+                    'progress-10': parentIndex === 1,
+                    'progress-20': parentIndex === 2,
+                    'progress-30': parentIndex === 3,
+                    'progress-40': parentIndex === 4,
+                    'progress-50': parentIndex === 5,
+                    'progress-60': parentIndex === 6,
+                    'progress-70': parentIndex === 7,
+                    'progress-80': parentIndex === 8,
+                    'progress-90': parentIndex === 9,
+                    'progress-100': parentIndex === 10
+
+
+                    }"
+                        
+                  
+                    >
                         <div class="overlay flex justify-center gap-1 items-center"><span>{{parentIndex }} sur</span> 10</div>
                     </div>
 
@@ -50,6 +68,7 @@ const {parentIndex} = toRefs(props)
         background-image: url("../public/Pattern.webp");
         background-position: center;
         position: relative;
+        max-height: 8rem;
 
         background-blend-mode: luminosity;
 
