@@ -4,13 +4,15 @@
     <div class="page-wrapper">
 
 
-            <!-- <HeroSection/> -->
+            <HeroSection v-if="page==0" @sendPage="sendPage" />
 
             <TopBar :parentIndex="index"/>
 
-            <Questions @sendIndex="sendIndex" :parentIndex="index" :data="data" />
+            <Questions v-if="page==1"  @sendIndex="sendIndex" :parentIndex="index" :data="data" />
 
-            <Footer />
+            <QuestionsList  v-if="page==2"/>
+
+            <Footer @sendPage="sendPage" />
 
 
 
@@ -25,13 +27,46 @@
 const config = useRuntimeConfig()
 
 
-const index=ref(1)
+const index=ref(0)
+
+
+const page=ref(0)
+
+
+
+
+localStorage.getItem('index')==null ? localStorage.setItem('index', 1) : "";
+
+localStorage.getItem('Page')==null ? localStorage.setItem('Page', 0) : "";
+
+
+
+page.value=parseInt(localStorage.getItem('Page'))
+
+
+
+index.value=parseInt(localStorage.getItem('index'))
+
+
+console.log("index storage",localStorage.getItem('index'))
+
+console.log("index value",index.value)
+
+
 
 const data=ref({})
 
+
+const sendPage=(value)=>{
+  page.value=value
+  localStorage.setItem('Page', 1)
+
+}
+
 const sendIndex=(value)=>{
     index.value=value
-    console.log("vaue",value)
+    localStorage.setItem('index', index.value)
+
 }
 
 
@@ -47,14 +82,18 @@ headers: {
 })
 
 
-data.value=paramData
+data.value=paramData.value.records
 
 
-console.log("param data",paramData)
+data.value=data.value.map(item => item.fields);
 
-console.log("baseId",config.public.baseId)
-console.log("tableIdOrName",config.public.tableIdOrName)
-console.log("api_Key",config.public.api_Key)
+const sortedRecords = data.value.sort((a, b) => a.ID - b.ID);
+
+data.value=sortedRecords  
+
+console.log("Sorted records:", data.value);
+
+
 
 
 

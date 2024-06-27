@@ -11,7 +11,7 @@
     
                 <h1 class="px-4  text-center pt-8 pb-2 text-white" >Bienvenue sur <span>trouve ton député</span> </h1>
                 <h6 class="text-center px-4 pb-6 text-textWhite100">L'application ultime pour découvrir le parti politique et le candidat qui correspond le mieux à vos valeurs et à vos préoccupations.</h6>
-                <button class="text-white w-11/12 py-4 mb-6">Commencer</button>
+                <button @click="changePage(1)" class="text-white w-11/12 py-4 mb-6">Commencer</button>
     
             </div>
     
@@ -24,6 +24,20 @@
 
 
 </template>
+
+<script setup>
+const emit = defineEmits(['sendPage'])
+
+
+const changePage=()=>{
+    emit('sendPage',1)
+
+}
+
+
+
+
+</script>
 
 <style lang="scss" scoped>
 @use "~/assets/styling.scss";
