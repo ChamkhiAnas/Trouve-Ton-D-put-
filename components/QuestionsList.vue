@@ -1,6 +1,11 @@
 <template>
-    <div class="obj" v-for="(obj, index) in Questions">
-        <Question :Question="obj"/>
+
+    <div class="questions-wrapper">
+            <div  v-for="(obj, index) in Questions">
+                <Question :Question="obj"/>
+        
+            </div>
+
 
     </div>
 </template>
@@ -9,11 +14,12 @@
 @use "~/assets/styling.scss";
 
 
-// .obj{
+.questions-wrapper{
   
-//     height: 60vh;
-//     overflow-y: scroll;
-// }
+    height: 60vh;
+    position: relative;
+    overflow-x:hidden;
+}
 </style>
 
 

@@ -21,7 +21,7 @@
                     </svg>
 
 
-                    <span :class="{ 'active-item': index==2 }" >Réponse (8)</span>
+                    <span :class="{ 'active-item': index==2 }" >Réponse ({{ questionsList.length }})</span>
 
                 </li>
                 <li @click="changeIndex(3)"  class="flex cursor-pointer flex-col items-center justify-center">
@@ -60,6 +60,15 @@
 const index=ref(0)
 
 index.value=parseInt(localStorage.getItem('Page'))
+
+
+const  questionsList = ref(0)
+
+questionsList.value=JSON.parse(localStorage.getItem('QuestionsList')) || [];
+
+
+
+console.log("questionsList footer",questionsList.length)
 
 
 

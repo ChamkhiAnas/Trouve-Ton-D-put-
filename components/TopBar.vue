@@ -11,16 +11,16 @@
                     <div class="radialProgressBar" 
 
                     :class="{
-                    'progress-10': parentIndex === 1,
-                    'progress-20': parentIndex === 2,
-                    'progress-30': parentIndex === 3,
-                    'progress-40': parentIndex === 4,
-                    'progress-50': parentIndex === 5,
-                    'progress-60': parentIndex === 6,
-                    'progress-70': parentIndex === 7,
-                    'progress-80': parentIndex === 8,
-                    'progress-90': parentIndex === 9,
-                    'progress-100': parentIndex === 10
+                    'progress-10': parentIndex >= 10,
+                    'progress-20': parentIndex >= 20,
+                    'progress-30': parentIndex >= 30,
+                    'progress-40': parentIndex >= 40,
+                    'progress-50': parentIndex >= 50,
+                    'progress-60': parentIndex >= 60,
+                    'progress-70': parentIndex >= 70,
+                    'progress-80': parentIndex >= 80,
+                    'progress-90': parentIndex >= 90,
+                    'progress-100': parentIndex >= 100
 
 
                     }"

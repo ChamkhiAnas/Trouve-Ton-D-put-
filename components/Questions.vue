@@ -10,7 +10,7 @@
 
 
 
-        <div class="question-card px-4 flex flex-col xs:px-8  justify-center w-11/12 m-0 m-auto mt-8">
+        <div class="question-card py-8 px-4 flex flex-col xs:px-8  justify-center w-11/12 m-0 m-auto mt-8">
 
             <div class="badge-type-question max-w-7xl py-2 px-6 ml-2">
                 <p>{{ questions[index].Thème }}</p>
@@ -251,7 +251,8 @@ const changeColorNeutral=(value)=>{
     color: white;
 
     .question-card{
-    height: 60vh;
+    min-height: 60vh;
+    height: fit-content;
     background-color: $forground;   
     border-radius:2.5rem;
     }

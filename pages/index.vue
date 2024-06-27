@@ -12,7 +12,7 @@
 
             <QuestionsList  v-if="page==2"/>
 
-            <Footer @sendPage="sendPage" />
+            <Footer :key="index" @sendPage="sendPage" />
 
 
 
