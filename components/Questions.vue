@@ -184,30 +184,11 @@ const Like=async(Obj)=>{
 
  
 const Dislike=async(Obj)=>{
-
     Obj["Status"] = "Dislike";
-
-    let Parties = JSON.parse(localStorage.getItem('Parties')) || [];
     let array = JSON.parse(localStorage.getItem('QuestionsList')) || [];
-
-
-    Obj["Partis en désaccord"].includes("NFP") ? Parties[0].NFP+=1 : "";
-    Obj["Partis en désaccord"].includes("RN") ? Parties[0].RN+=1: "";
-    Obj["Partis en désaccord"].includes("EN") ? Parties[0].EN+=1 : "";
-    Obj["Partis en désaccord"].includes("LR") ? Parties[0].LR+=1: "";
-
-
-
     array.push(Obj);
-
     await localStorage.setItem('QuestionsList', JSON.stringify(array));
-    await localStorage.setItem('Parties', JSON.stringify(Parties));
-
-
     NextStep();
-
-
-
 }
 
 
@@ -251,7 +232,7 @@ const changeColorNeutral=(value)=>{
     color: white;
 
     .question-card{
-    min-height: 60vh;
+    min-height: 50vh;
     height: fit-content;
     background-color: $forground;   
     border-radius:2.5rem;

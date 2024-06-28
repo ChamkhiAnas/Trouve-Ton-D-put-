@@ -6,7 +6,7 @@
 
             <HeroSection v-if="page==0" @sendPage="sendPage" />
 
-            <TopBar :parentIndex="index"/>
+            <TopBar :pageIndex="page" :parentIndex="index" :maxlength="data.length"/>
 
             <Questions v-if="page==1"  @sendIndex="sendIndex" :parentIndex="index" :data="data" />
 

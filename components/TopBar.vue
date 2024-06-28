@@ -6,9 +6,56 @@
             <div class="hero-section max-w-6xl m-0 m-auto flex flex-col  gap-10  justify-center items-center w-full">
         
                 <div class=" flex justify-between items-center p-4 w-full">
-                    <h1>Questions</h1>
+                    <h1 v-if="pageIndex==1" >Questions</h1>
 
-                    <div class="radialProgressBar" 
+                    <div v-if="pageIndex==2" class="flex flex-col mt-2">
+                        <h1>Réponse</h1>
+
+                        <div class="flex  justify-center gap-2 items-center">
+                            <h6>{{parentIndex-1 }} questions répondues / <span> {{maxlength}}</span><span></span></h6>
+
+                            <span class="group relative">
+                                <div class="absolute bottom-[calc(100%+0.5rem)] left-[50%] -translate-x-[50%] hidden group-hover:block w-auto">
+                                <div class="bottom-full right-0 rounded bg-black px-4 py-1 text-xs text-white whitespace-nowrap">
+                                    Répondez à un maximum de questions <br> pour avoir le résultat le plus fiable possible. 
+                                </div>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="#ffffff" d="M13 13h-2V7h2m0 10h-2v-2h2M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2"/></svg>
+                            </span>
+                        </div>
+                        <div>
+                          
+                        </div>
+
+
+                    </div>
+
+
+                    <div v-if="pageIndex==3" class="flex flex-col mt-2">
+                        <h1>Résultat</h1>
+
+                        <div class="flex  justify-center gap-2 items-center">
+                            <h6>Basé sur {{parentIndex-1 }}  questions répondues / <span> {{maxlength}}</span><span></span></h6>
+
+                            <span class="group relative">
+                                <div class="absolute bottom-[calc(100%+0.5rem)] left-[50%] -translate-x-[50%] hidden group-hover:block w-auto">
+                                <div class="bottom-full right-0 rounded bg-black px-4 py-1 text-xs text-white whitespace-nowrap">
+                                    Répondez à un maximum de questions <br> pour avoir le résultat le plus fiable possible. 
+                                </div>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="#ffffff" d="M13 13h-2V7h2m0 10h-2v-2h2M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2"/></svg>
+                            </span>
+                        </div>
+                        <div>
+                          
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div v-if="pageIndex==1 && pageIndex==2" class="radialProgressBar" 
 
                     :class="{
                     'progress-10': parentIndex >= 10,
@@ -27,11 +74,15 @@
                         
                   
                     >
-                        <div class="overlay flex justify-center gap-1 items-center"><span>{{parentIndex }} sur</span> 10</div>
+                        <div v-if="pageIndex==1" class="overlay flex justify-center gap-1 items-center"><span>{{parentIndex }} sur</span> {{maxlength}}</div>
+                        <div v-if="pageIndex==2" class="overlay réponse flex justify-center gap-1 items-center">{{parentIndex-1 }} </div>
+
                     </div>
 
 
                 </div>
+
+
                
             </div>
     
@@ -46,9 +97,14 @@
 
 <script setup>
 
-const props = defineProps(['parentIndex'])
+const props = defineProps(['parentIndex','maxlength','pageIndex'])
 
 const {parentIndex} = toRefs(props)
+
+const {maxlength} = toRefs(props)
+
+const {pageIndex} =  toRefs(props)
+
 
 
 
@@ -92,11 +148,20 @@ const {parentIndex} = toRefs(props)
         color: white;
 
     }
+    h6{
+
+        font-family: $P-Medium;
+        font-size:calc(0.8rem + 0.2vw);
+        color: white;
+        span {
+        font-family: $M-Italic;
+        }
+    }
 
     .radialProgressBar {
     border-radius: 50%;
-    width: 4.3rem;
-    height: 4.3rem;
+    width: 5.3rem;
+    height: 5.3rem;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -113,12 +178,17 @@ const {parentIndex} = toRefs(props)
 
 
     }
+
+    .réponse{
+    font-size: calc(1.2rem + 0.1vw);
+
+    }
     }
 
     .radialProgressBar .overlay {
       border-radius: 50%;
-      width: 3.5rem;
-      height: 3.5rem;
+      width: 4.5rem;
+      height: 4.5rem;
       margin: auto;
       background: $primary;
       text-align: center;

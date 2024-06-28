@@ -84,7 +84,6 @@ const updatePartyCount = (parties, question, key, increment) => {
 
 const Like = async (Question) => {
 
-  Question.Status="Like";
 
   let parties = JSON.parse(localStorage.getItem('Parties')) || [];
   let questionsList = JSON.parse(localStorage.getItem('QuestionsList')) || [];
@@ -94,12 +93,22 @@ const Like = async (Question) => {
     item.ID === Question.ID ? { ...item, Status: "Like" } : item
   );
 
-  if (Question.Status === "Neutral") {
+
+  if(Question.Status === "Neutral") {
     updatePartyCount(parties, Question, "Partis en accord", 1);
+    console.log("1")
   } else if (Question.Status === "Dislike") {
-    updatePartyCount(parties, Question, "Partis en désaccord", -1);
     updatePartyCount(parties, Question, "Partis en accord", 1);
+    console.log("2")
   }
+
+  Question.Status="Like";
+
+
+  console.log("Parties",parties)
+
+  console.log("Question status",Question.Status)
+
 
   await localStorage.setItem('QuestionsList', JSON.stringify(questionsList));
   await localStorage.setItem('Parties', JSON.stringify(parties));
@@ -110,7 +119,6 @@ const Like = async (Question) => {
 
 const Dislike=async (Question)=>{
 
-  Question.Status="Dislike";
 
   let parties = JSON.parse(localStorage.getItem('Parties')) || [];
   let questionsList = JSON.parse(localStorage.getItem('QuestionsList')) || [];
@@ -118,13 +126,13 @@ const Dislike=async (Question)=>{
   questionsList = questionsList.map(item => 
     item.ID === Question.ID ? { ...item, Status: "Dislike" } : item
   );
-
-  if (Question.Status === "Neutral") {
-    updatePartyCount(parties, Question, "Partis en désaccord", 1);
-  } else if (Question.Status === "Like") {
-    updatePartyCount(parties, Question, "Partis en désaccord", 1);
+  if (Question.Status === "Like") {
     updatePartyCount(parties, Question, "Partis en accord", -1);
   }
+
+
+  Question.Status="Dislike";
+
 
   await localStorage.setItem('QuestionsList', JSON.stringify(questionsList));
   await localStorage.setItem('Parties', JSON.stringify(parties));
@@ -135,7 +143,6 @@ const Dislike=async (Question)=>{
 const Neutral= async(Question)=>{
 
 
-  Question.Status="Neutral";
 
   let parties = JSON.parse(localStorage.getItem('Parties')) || [];
   let questionsList = JSON.parse(localStorage.getItem('QuestionsList')) || [];
@@ -144,11 +151,12 @@ const Neutral= async(Question)=>{
     item.ID === Question.ID ? { ...item, Status: "Neutral" } : item
   );
 
-  if (Question.Status === "Dislike") {
-    updatePartyCount(parties, Question, "Partis en désaccord", -1);
-  } else if (Question.Status === "Like") {
+  if (Question.Status === "Like") {
     updatePartyCount(parties, Question, "Partis en accord", -1);
   }
+
+
+  Question.Status="Neutral";
 
   await localStorage.setItem('QuestionsList', JSON.stringify(questionsList));
   await localStorage.setItem('Parties', JSON.stringify(parties));
