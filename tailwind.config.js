@@ -18,6 +18,7 @@ export default {
         textWhite100:'#A8A8AB',
         textWhite200:'#FAF9F6', 
         textWhite250:'#FFFFFF',
+        primary:'#E6255B'
 
 
 

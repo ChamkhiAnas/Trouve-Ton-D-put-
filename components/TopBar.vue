@@ -55,7 +55,7 @@
 
 
 
-                    <div v-if="pageIndex==1 && pageIndex==2" class="radialProgressBar" 
+                    <div v-if="pageIndex==1 || pageIndex==2" class="radialProgressBar" 
 
                     :class="{
                     'progress-10': parentIndex >= 10,

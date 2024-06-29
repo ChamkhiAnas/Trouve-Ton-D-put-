@@ -12,6 +12,10 @@
 
             <QuestionsList  v-if="page==2"/>
 
+            <Resultats :maxlength="data.length" :resultats="resultats" v-if="page==3"/>
+
+
+
             <Footer :key="index" @sendPage="sendPage" />
 
 
@@ -30,6 +34,9 @@ const config = useRuntimeConfig()
 const index=ref(0)
 
 
+const resultats=ref({})
+
+
 const page=ref(0)
 
 
@@ -39,6 +46,14 @@ localStorage.getItem('index')==null ? localStorage.setItem('index', 1) : "";
 
 localStorage.getItem('Page')==null ? localStorage.setItem('Page', 0) : "";
 
+
+
+localStorage.getItem('Parties')!=null ? resultats.value=JSON.parse(localStorage.getItem('Parties'))[0] : "";
+
+
+
+
+console.log("resultats",resultats.value)
 
 
 page.value=parseInt(localStorage.getItem('Page'))
