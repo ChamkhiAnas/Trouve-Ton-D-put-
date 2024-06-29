@@ -12,7 +12,7 @@
                         <h1>Réponse</h1>
 
                         <div class="flex  justify-center gap-2 items-center">
-                            <h6>{{parentIndex-1 }} questions répondues / <span> {{maxlength}}</span><span></span></h6>
+                            <h6>{{Questions.length }} questions répondues / <span> {{maxlength}}</span><span></span></h6>
 
                             <span class="group relative">
                                 <div class="absolute bottom-[calc(100%+0.5rem)] left-[50%] -translate-x-[50%] hidden group-hover:block w-auto">
@@ -35,7 +35,7 @@
                         <h1>Résultat</h1>
 
                         <div class="flex  justify-center gap-2 items-center">
-                            <h6>Basé sur {{parentIndex-1 }}  questions répondues / <span> {{maxlength}}</span><span></span></h6>
+                            <h6>Basé sur {{Questions.length }}  questions répondues / <span> {{maxlength}}</span><span></span></h6>
 
                             <span class="group relative">
                                 <div class="absolute bottom-[calc(100%+0.5rem)] left-[50%] -translate-x-[50%] hidden group-hover:block w-auto">
@@ -58,7 +58,8 @@
                     <div v-if="pageIndex==1 || pageIndex==2" class="radialProgressBar" 
 
                     :class="{
-                    'progress-10': parentIndex >= 10,
+                    'progress-0': parentIndex >= 0,
+                    'progress-10': parentIndex >= 5,
                     'progress-20': parentIndex >= 20,
                     'progress-30': parentIndex >= 30,
                     'progress-40': parentIndex >= 40,
@@ -75,7 +76,7 @@
                   
                     >
                         <div v-if="pageIndex==1" class="overlay flex justify-center gap-1 items-center"><span>{{parentIndex }} sur</span> {{maxlength}}</div>
-                        <div v-if="pageIndex==2" class="overlay réponse flex justify-center gap-1 items-center">{{parentIndex-1 }} </div>
+                        <div v-if="pageIndex==2" class="overlay réponse flex justify-center gap-1 items-center">{{Questions.length }} </div>
 
                     </div>
 
@@ -104,6 +105,16 @@ const {parentIndex} = toRefs(props)
 const {maxlength} = toRefs(props)
 
 const {pageIndex} =  toRefs(props)
+
+
+
+const Questions=ref({})
+
+Questions.value=JSON.parse(localStorage.getItem('QuestionsList')) || [];
+
+
+console.log("Questions value",Questions.value.length)
+
 
 
 

@@ -3,7 +3,7 @@
 
 
 <div class="questions">
-    <div class="question max-w-6xl m-0 m-auto pt-8">
+    <div v-if="QuestionsAnswered.length<maxlength" class="question max-w-6xl m-0 m-auto pt-8">
 
        
 
@@ -13,9 +13,9 @@
         <div class="question-card py-8 px-4 flex flex-col xs:px-8  justify-center w-11/12 m-0 m-auto mt-8">
 
             <div class="badge-type-question max-w-7xl py-2 px-6 ml-2">
-                <p>{{ questions[index].Thème }}</p>
+                <p>{{ questions[index-1].Thème }}</p>
             </div>
-            <h1 class="px-4 mt-4">{{ questions[index].Question }}</h1>
+            <h1 class="px-4 mt-4">{{ questions[index-1].Question }}</h1>
 
 
         </div>
@@ -23,7 +23,7 @@
 
         <div class="swipe-btns px-1 sm:px-2 mt-10  pb-6 flex justify-center items-center  gap-1 xs:gap-4 sm:gap-8">
 
-                <div :style="{ backgroundColor: bgColorError }"  @click="changeColorError('#7D1A1A');Dislike(questions[index])" @mousedown="changeColorError('#7D1A1A')" @mouseup="changeColorError('#7D1A1A')" class="controll-btn cursor-pointer px-6 max-h-24 h-fit sm:px-8  py-2 flex gap-2 justify-center items-center flex-wrap ">
+                <div :style="{ backgroundColor: bgColorError }"  @click="changeColorError('#7D1A1A');Dislike(questions[index-1])" @mousedown="changeColorError('#7D1A1A')" @mouseup="changeColorError('#7D1A1A')" class="controll-btn cursor-pointer px-6 max-h-24 h-fit sm:px-8  py-2 flex gap-2 justify-center items-center flex-wrap ">
                     <label class="cursor-pointer">Contre</label>
                     <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M14 25.3333C20.2592 25.3333 25.3333 20.2592 25.3333 14C25.3333 7.74077 20.2592 2.66667 14 2.66667C7.74077 2.66667 2.66667 7.74077 2.66667 14C2.66667 20.2592 7.74077 25.3333 14 25.3333ZM28 14C28 21.732 21.732 28 14 28C6.26801 28 0 21.732 0 14C0 6.26801 6.26801 0 14 0C21.732 0 28 6.26801 28 14Z" fill="white"/>
@@ -37,13 +37,13 @@
 
                 </div>
 
-                <div :style="{ backgroundColor: bgNeutral }"  @click="changeColorNeutral('#cac9c9d9');Neutral(questions[index])" class="next-btn cursor-pointer flex justify-center  items-center px-4 py-4">
+                <div :style="{ backgroundColor: bgNeutral }"  @click="changeColorNeutral('#cac9c9d9');Neutral(questions[index-1])" class="next-btn cursor-pointer flex justify-center  items-center px-4 py-4">
                     <label  class="cursor-pointer">Passer</label>
                 </div>
 
             
 
-                <div :style="{ backgroundColor: bgColorSucces }" @click="changeColorSucces('#1C4920');Like(questions[index])" class="controll-btn cursor-pointer px-6 max-h-24 h-fit  sm:px-8 py-2  flex gap-2 justify-center items-center flex-wrap">
+                <div :style="{ backgroundColor: bgColorSucces }" @click="changeColorSucces('#1C4920');Like(questions[index-1])" class="controll-btn cursor-pointer px-6 max-h-24 h-fit  sm:px-8 py-2  flex gap-2 justify-center items-center flex-wrap">
                     <label class="cursor-pointer">Pour</label>
                     <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M14 25.3333C20.2592 25.3333 25.3333 20.2592 25.3333 14C25.3333 7.74077 20.2592 2.66667 14 2.66667C7.74077 2.66667 2.66667 7.74077 2.66667 14C2.66667 20.2592 7.74077 25.3333 14 25.3333ZM28 14C28 21.732 21.732 28 14 28C6.26801 28 0 21.732 0 14C0 6.26801 6.26801 0 14 0C21.732 0 28 6.26801 28 14Z" fill="white"/>
@@ -64,6 +64,10 @@
 
     </div>
 
+    <div v-if="QuestionsAnswered.length>=maxlength" class="max-w-6xl m-0 m-auto justify-center items-center w-full p-4" >
+            <h3>Félicitations, vous avez voté toutes les propositions !</h3>
+    </div>
+
 </div>  
 
 </template>
@@ -72,12 +76,15 @@
 
 
 const props = defineProps(['data','parentIndex'])
-const emit = defineEmits(['sendIndex'])
+const emit = defineEmits(['sendIndex','sendQuestionsAnswered'])
 
 
 
 const questions=ref({})
 
+const QuestionsAnswered=ref({})
+
+QuestionsAnswered.value=JSON.parse(localStorage.getItem('QuestionsList'))
 
 
 const { parentIndex } = toRefs(props)
@@ -89,7 +96,6 @@ index.value=parentIndex.value
 
 
 
-console.log("index props questions",index.value)
 
 const maxlength=ref(0)
 
@@ -99,6 +105,10 @@ questions.value=props.data
 
 
 maxlength.value=questions.value.length
+
+
+console.log("maxlength",maxlength.value)
+
 
 
 
@@ -126,8 +136,15 @@ localStorage.getItem('Parties')==null ?  localStorage.setItem('Parties', JSON.st
 localStorage.getItem('QuestionsList')==null ?  localStorage.setItem('QuestionsList', JSON.stringify(array.value)) : ""
 
 
+const RecallQuestionsAnswered=async()=>{
+    QuestionsAnswered.value=JSON.parse(localStorage.getItem('QuestionsList'))
+    emit('sendQuestionsAnswered',QuestionsAnswered.value)
+
+}
+
 
 const NextStep=async()=>{
+
     index.value<maxlength.value ? index.value+=1 : ""
     emit('sendIndex',index.value)
 }
@@ -146,6 +163,7 @@ const Neutral=async(Obj)=>{
     await localStorage.setItem('QuestionsList', JSON.stringify(array));
 
     NextStep();
+    RecallQuestionsAnswered();
 
 
 
@@ -177,6 +195,8 @@ const Like=async(Obj)=>{
 
 
     NextStep();
+    RecallQuestionsAnswered();
+
 
 
 }
@@ -189,6 +209,8 @@ const Dislike=async(Obj)=>{
     array.push(Obj);
     await localStorage.setItem('QuestionsList', JSON.stringify(array));
     NextStep();
+    RecallQuestionsAnswered();
+
 }
 
 
@@ -281,6 +303,10 @@ const changeColorNeutral=(value)=>{
 
     }
 
+    h3{
+        color: white;
+        font-family: $P-SemiBold;
+    }
 }
 
 

@@ -1,36 +1,38 @@
 <template>
         <div class="resultat-wrapper  relative">
 
+            
+
             <div  v-for="(obj, index) in resultats" class="resultat-card relative mb-8 w-11/12  max-w-6xl  min-h-28 m-0 m-auto mt-8">
 
                 <div class="logo-circle ml-4 pt-6">
 
-                    <div v-if="index=='NFP'" class="logo" style="background-image: url(/NFP.png);"></div>
-                    <div v-if="index=='RN'" class="logo" style="background-image: url(/RN.svg);"></div>
-                    <div v-if="index=='EN'" class="logo" style="background-image: url(/en.png);background-size: cover"></div>
-                    <div v-if="index=='LR'" class="logo" style="background-image: url(/LR.svg);"></div>
+                    <div v-if="obj.key=='NFP'" class="logo" style="background-image: url(/NFP.png);"></div>
+                    <div v-if="obj.key=='RN'" class="logo" style="background-image: url(/RN.svg);"></div>
+                    <div v-if="obj.key=='EN'" class="logo" style="background-image: url(/en.png);background-size: cover"></div>
+                    <div v-if="obj.key=='LR'" class="logo" style="background-image: url(/LR.svg);"></div>
 
 
                 </div>
                 <h1 class="px-4  pt-4 pb-0">
-                {{ index === 'NFP' ? 'Nouveau Front Populaire' :
-                index === 'RN' ? 'Rassemblement National' :
-                index === 'EN' ? 'Ensemble Pour La République' :
-                index === 'LR' ? 'Les Républicains' : '' }}
+                {{ obj.key === 'NFP' ? 'Nouveau Front Populaire' :
+                obj.key === 'RN' ? 'Rassemblement National' :
+                obj.key === 'EN' ? 'Ensemble Pour La République' :
+                obj.key === 'LR' ? 'Les Républicains' : '' }}
                 </h1>
-                <h4 class="px-4 ">{{obj}} points sur {{maxlength}} possibles  <span>({{ obj/maxlength * maxlength }}%)</span></h4>
+                <h4 class="px-4 ">{{obj.value}} points sur {{maxlength}} possibles  <span>({{ Math.floor(obj.value/maxlength * maxlength) }}%)</span></h4>
 
                 <div class="resultat rounded-xl px-4 pt-4">
                     <div class="bg-gray-100 rounded-xl">
-                        <div class="bg-primary rounded-xl"  :style="{ height: '18px', width: obj+'%'}"></div>
+                        <div class="bg-primary rounded-xl"  :style="{ height: '18px', width: obj.value+'%'}"></div>
                     </div><br>
                 </div>
 
                 <div class="resultat-btns flex flex-wrap gap-2 px-4 pb-6">
-                    <button v-if="index!=='LR'" @click="Download(index)" class="download-btn cursor-pointer px-6 py-2 ">
+                    <button v-if="index!=='LR'" @click="Download(obj.key)" class="download-btn cursor-pointer px-6 py-2 ">
                         <label class="cursor-pointer">Télécharger le programme</label>
                     </button>
-                    <button @click="Visit(index)" class="site-btn flex flex-wrap  justify-center items-center  gap-3 cursor-pointer px-6 py-2 ">
+                    <button @click="Visit(obj.key)" class="site-btn flex flex-wrap  justify-center items-center  gap-3 cursor-pointer px-6 py-2 ">
                         <label class="cursor-pointer">Visitez le site officiel</label>
                         <svg width="26" height="26" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g filter="url(#filter0_b_799_713)">
@@ -58,40 +60,42 @@
 </template>
 
 <script setup>
-const props = defineProps(['resultats','maxlength'])
-const {resultats} = toRefs(props)
+const props = defineProps(['maxlength'])
+
 const {maxlength} = toRefs(props)
 
+const resultats=ref([])
 
-resultats.value!=null ? Object.entries(resultats.value).map(([key, value]) => ({ [key]: value })) : "";
+localStorage.getItem('Parties')!=null ? resultats.value=JSON.parse(localStorage.getItem('Parties'))[0] : "";
+
+
+resultats.value= Object.entries(resultats.value).map(([key, value]) => ({ key, value }));
+
+resultats.value=resultats.value.sort((a, b) => b.value - a.value);
+
+
+console.log("resultats",resultats.value)
+
 
 
 const Visit=(index)=>{
-
-
     index === 'NFP' ?   window.open('https://www.nouveaufrontpopulaire.fr', '_blank') :
     index === 'RN' ?  window.open('https://rassemblementnational.fr', '_blank') :
     index === 'EN' ? window.open('https://ensemble-2024.fr/', '_blank') :
     index === 'LR' ? window.open('https://republicains.fr', '_blank')  : '' 
-
-
 }
 
 
 const Download=(index)=>{
-
     index === 'NFP' ?   window.open('https://www.nouveaufrontpopulaire.fr/programme', '_blank') :
     index === 'RN' ?  window.open('https://rassemblementnational.fr/documents/202406-programme.pdf', '_blank') :
     index === 'EN' ? window.open('https://ensmbl.fr/notre-projet/', '_blank') :
     index === 'LR' ? window.open('https://republicains.fr', '_blank')  : '' 
-
-
 }
 
 
 
 
-console.log("resultats",resultats.value)
 
 
 

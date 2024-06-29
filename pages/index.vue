@@ -6,17 +6,15 @@
 
             <HeroSection v-if="page==0" @sendPage="sendPage" />
 
-            <TopBar :pageIndex="page" :parentIndex="index" :maxlength="data.length"/>
+            <TopBar :key="questionsAnswered" v-if="page!==0" :pageIndex="page" :parentIndex="index" :maxlength="data.length"/>
 
-            <Questions v-if="page==1"  @sendIndex="sendIndex" :parentIndex="index" :data="data" />
+            <Questions v-if="page==1"  @sendIndex="sendIndex" @sendQuestionsAnswered="sendQuestionsAnswered" :parentIndex="index" :data="data" />
 
             <QuestionsList  v-if="page==2"/>
 
-            <Resultats :maxlength="data.length" :resultats="resultats" v-if="page==3"/>
+            <Resultats :key="index" :maxlength="data.length"  v-if="page==3"/>
 
-
-
-            <Footer :key="index" @sendPage="sendPage" />
+            <Footer v-if="page!==0" :key="questionsAnswered" @sendPage="sendPage" />
 
 
 
@@ -32,9 +30,9 @@ const config = useRuntimeConfig()
 
 
 const index=ref(0)
+const questionsAnswered=ref([])
 
 
-const resultats=ref({})
 
 
 const page=ref(0)
@@ -46,14 +44,14 @@ localStorage.getItem('index')==null ? localStorage.setItem('index', 1) : "";
 
 localStorage.getItem('Page')==null ? localStorage.setItem('Page', 0) : "";
 
-
-
-localStorage.getItem('Parties')!=null ? resultats.value=JSON.parse(localStorage.getItem('Parties'))[0] : "";
-
+localStorage.getItem('QuestionsList')==null ? localStorage.setItem('QuestionsList', JSON.stringify([])) : "";
 
 
 
-console.log("resultats",resultats.value)
+
+
+
+
 
 
 page.value=parseInt(localStorage.getItem('Page'))
@@ -74,13 +72,18 @@ const data=ref({})
 
 const sendPage=(value)=>{
   page.value=value
-  localStorage.setItem('Page', 1)
+  localStorage.setItem('Page', value)
 
 }
 
 const sendIndex=(value)=>{
     index.value=value
     localStorage.setItem('index', index.value)
+}
+
+
+const sendQuestionsAnswered=(value)=>{
+  questionsAnswered.value=value
 
 }
 
