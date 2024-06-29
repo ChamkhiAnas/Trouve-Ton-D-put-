@@ -7,6 +7,8 @@
         
                 <div class=" flex justify-between items-center p-4 w-full">
                     <h1 v-if="pageIndex==1" >Questions</h1>
+                    <h1 v-if="pageIndex==4" >A propos</h1>
+
 
                     <div v-if="pageIndex==2" class="flex flex-col mt-2">
                         <h1>Réponse</h1>

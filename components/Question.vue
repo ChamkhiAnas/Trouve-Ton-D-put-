@@ -217,7 +217,7 @@ const Neutral= async(Question)=>{
         h1{
             line-height: 148%;
             font-family: $P-SemiBold;
-            font-size: calc(1.4rem + 0.2vw);
+            font-size: calc(1.2rem + 0.2vw);
         }
     
 

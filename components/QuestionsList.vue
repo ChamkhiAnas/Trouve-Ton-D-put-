@@ -1,6 +1,6 @@
 <template>
 
-    <div class="questions-wrapper">
+    <div class="questions-wrapper ">
         <div v-if="Questions.length>0">
             <div  v-for="(obj, index) in Questions">
                 <Question :Question="obj"/>
@@ -11,8 +11,12 @@
         </div>
 
 
-        <div class="max-w-6xl m-0 m-auto justify-center items-center w-full p-4" v-if="Questions.length==0">
-            <h3>Vous n'avez voté pour aucun proposition pour l'instant !</h3>
+        <div class="flex justify-center items-center mt-10" v-if="Questions.length==0">
+
+            <div class="flex max-w-6xl m-0 m-auto justify-center items-center w-full p-4" >
+                <h3>Vous n'avez voté pour aucun proposition pour l'instant !</h3>
+            </div>
+
         </div>
 
 
@@ -33,7 +37,8 @@
 
     h3{
         color: white;
-        font-family: $P-SemiBold;
+        font-family: $M-Italic;
+        font-size: calc(1rem + 0.3vw);
     }
 }
 </style>

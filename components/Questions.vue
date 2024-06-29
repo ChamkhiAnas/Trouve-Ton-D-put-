@@ -2,7 +2,7 @@
 
 
 
-<div class="questions">
+<div class="questions flex">
     <div v-if="QuestionsAnswered.length<maxlength" class="question max-w-6xl m-0 m-auto pt-8">
 
        
@@ -64,8 +64,14 @@
 
     </div>
 
-    <div v-if="QuestionsAnswered.length>=maxlength" class="max-w-6xl m-0 m-auto justify-center items-center w-full p-4" >
-            <h3>Félicitations, vous avez voté toutes les propositions !</h3>
+    <div v-if="QuestionsAnswered.length>=maxlength" class="max-w-6xl flex  m-0 m-auto justify-center items-center w-full p-4" >
+
+            <div class="controll-btns flex flex-col   items-center w-11/12 lg:w-2/4 ">
+                
+                <h1 class="px-4 flex justify-center gap-2 mb-4 text-center pt-8 pb-2 text-white" > Félicitations, vous avez voté  toutes les propositions ! </h1>
+                <button @click="changePage(3)" class="text-white w-11/12 py-4 mb-6">Voir mes résultats</button>
+
+            </div>
     </div>
 
 </div>  
@@ -76,7 +82,14 @@
 
 
 const props = defineProps(['data','parentIndex'])
-const emit = defineEmits(['sendIndex','sendQuestionsAnswered'])
+const emit = defineEmits(['sendIndex','sendQuestionsAnswered','sendPage'])
+
+
+
+
+const changePage=(value)=>{
+    emit('sendPage',value)
+}
 
 
 
@@ -274,7 +287,7 @@ const changeColorNeutral=(value)=>{
         h1{
             line-height: 148%;
             font-family: $P-SemiBold;
-            font-size: calc(1.4rem + 0.2vw);
+            font-size: calc(1.2rem + 0.2vw);
         }
     
 
@@ -305,10 +318,32 @@ const changeColorNeutral=(value)=>{
 
     h3{
         color: white;
-        font-family: $P-SemiBold;
+        font-family: $M-Italic;
+        font-size:calc(1rem + 0.2vw)
     }
 }
 
+
+.controll-btns{
+    border-radius: 2rem;
+    background-color: $secondary;
+    max-height: 40rem;
+    height: fit-content;
+    h1{
+        font-size: calc(1.2rem + 0.5vw);
+        font-family:  $M-Italic;
+    }
+
+    button{
+    border-radius: 4rem;
+    font-family: $P-SemiBold;
+    background-color: $primary;
+    font-size: calc(0.9rem + 0.5vw);
+
+
+    
+    }
+}
 
 
 </style>

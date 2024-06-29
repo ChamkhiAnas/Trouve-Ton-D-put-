@@ -8,13 +8,15 @@
 
             <TopBar :key="questionsAnswered" v-if="page!==0" :pageIndex="page" :parentIndex="index" :maxlength="data.length"/>
 
-            <Questions v-if="page==1"  @sendIndex="sendIndex" @sendQuestionsAnswered="sendQuestionsAnswered" :parentIndex="index" :data="data" />
+            <Questions v-if="page==1" @sendPage="sendPage"  @sendIndex="sendIndex" @sendQuestionsAnswered="sendQuestionsAnswered" :parentIndex="index" :data="data" />
 
             <QuestionsList  v-if="page==2"/>
 
             <Resultats :key="index" :maxlength="data.length"  v-if="page==3"/>
 
-            <Footer v-if="page!==0" :key="questionsAnswered" @sendPage="sendPage" />
+            <Apropos v-if="page==4"/>
+
+            <Footer v-if="page!==0" :key="questionsAnswered+'----'+page" @sendPage="sendPage" />
 
 
 

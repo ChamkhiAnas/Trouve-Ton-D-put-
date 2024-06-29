@@ -1,6 +1,6 @@
 <template>
 
-    <div class="footer-section flex">
+    <div class="footer-section shadow-2xl flex">
 
         <div class=" max-w-4xl m-0 m-auto flex flex-col  gap-10  justify-center items-center w-full">
         

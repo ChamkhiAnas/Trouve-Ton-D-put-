@@ -23,13 +23,13 @@
                 <h4 class="px-4 ">{{obj.value}} points sur {{maxlength}} possibles  <span>({{ Math.floor(obj.value/maxlength * maxlength) }}%)</span></h4>
 
                 <div class="resultat rounded-xl px-4 pt-4">
-                    <div class="bg-gray-100 rounded-xl">
+                    <div class="bg-forground rounded-xl">
                         <div class="bg-primary rounded-xl"  :style="{ height: '18px', width: obj.value+'%'}"></div>
                     </div><br>
                 </div>
 
                 <div class="resultat-btns flex flex-wrap gap-2 px-4 pb-6">
-                    <button v-if="index!=='LR'" @click="Download(obj.key)" class="download-btn cursor-pointer px-6 py-2 ">
+                    <button v-if="obj.key!=='LR'" @click="Download(obj.key)" class="download-btn cursor-pointer px-6 py-2 ">
                         <label class="cursor-pointer">Télécharger le programme</label>
                     </button>
                     <button @click="Visit(obj.key)" class="site-btn flex flex-wrap  justify-center items-center  gap-3 cursor-pointer px-6 py-2 ">
