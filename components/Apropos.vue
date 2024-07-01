@@ -99,7 +99,7 @@
                         Des questions, des idées ou des retours <br><br>
                     </p>
 
-                    <button class="py-3 px-8 bg-primary rounded-md text-white">Contactez-nous</button>
+                    <button class="py-3 px-8 bg-primary rounded-md text-white"><a href="mailto:admin@quelparti.com">Contactez-nous</a></button>
 
                 </div>
             </div>
