@@ -63,9 +63,6 @@ page.value=parseInt(localStorage.getItem('Page'))
 index.value=parseInt(localStorage.getItem('index'))
 
 
-console.log("index storage",localStorage.getItem('index'))
-
-console.log("index value",index.value)
 
 
 
@@ -110,8 +107,6 @@ data.value=data.value.map(item => item.fields);
 const sortedRecords = data.value.sort((a, b) => a.ID - b.ID);
 
 data.value=sortedRecords  
-
-console.log("Sorted records:", data.value);
 
 
 

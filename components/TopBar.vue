@@ -115,8 +115,6 @@ const Questions=ref({})
 Questions.value=JSON.parse(localStorage.getItem('QuestionsList')) || [];
 
 
-console.log("Questions value",Questions.value.length)
-
 
 
 

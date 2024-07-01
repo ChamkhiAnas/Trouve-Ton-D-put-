@@ -71,7 +71,6 @@ const props = defineProps(['Question'])
 
 const {Question} = toRefs(props)
 
-console.log("questions",Question.value)
 
 
 const updatePartyCount = (parties, question, key, increment) => {
@@ -96,18 +95,13 @@ const Like = async (Question) => {
 
   if(Question.Status === "Neutral") {
     updatePartyCount(parties, Question, "Partis en accord", 1);
-    console.log("1")
   } else if (Question.Status === "Dislike") {
     updatePartyCount(parties, Question, "Partis en accord", 1);
-    console.log("2")
   }
 
   Question.Status="Like";
 
 
-  console.log("Parties",parties)
-
-  console.log("Question status",Question.Status)
 
 
   await localStorage.setItem('QuestionsList', JSON.stringify(questionsList));

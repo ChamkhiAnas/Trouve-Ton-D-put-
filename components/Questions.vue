@@ -120,7 +120,6 @@ questions.value=props.data
 maxlength.value=questions.value.length
 
 
-console.log("maxlength",maxlength.value)
 
 
 

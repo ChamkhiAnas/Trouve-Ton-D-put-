@@ -74,8 +74,6 @@ resultats.value= Object.entries(resultats.value).map(([key, value]) => ({ key, v
 resultats.value=resultats.value.sort((a, b) => b.value - a.value);
 
 
-console.log("resultats",resultats.value)
-
 
 
 const Visit=(index)=>{
