@@ -23,7 +23,7 @@
 
         <div class="swipe-btns px-1 sm:px-2 mt-10 mb-10  pb-6 flex justify-center items-center  gap-1 xs:gap-4 sm:gap-8">
 
-                <div :style="{ backgroundColor: bgColorError }"  @click="changeColorError('#7D1A1A');Dislike(questions[index-1])" @mousedown="changeColorError('#7D1A1A')" @mouseup="changeColorError('#7D1A1A')" class="controll-btn cursor-pointer px-6 max-h-24 h-fit sm:px-8  py-2 flex gap-2 justify-center items-center flex-wrap ">
+                <button :style="{ backgroundColor: bgColorError }"  @click="changeColorError('#7D1A1A');Dislike(questions[index-1])" @mousedown="changeColorError('#7D1A1A')" @mouseup="changeColorError('#7D1A1A')" class="controll-btn cursor-pointer px-6 max-h-24 h-fit sm:px-8  py-2 flex gap-2 justify-center items-center flex-wrap ">
                     <label class="cursor-pointer">Contre</label>
                     <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M14 25.3333C20.2592 25.3333 25.3333 20.2592 25.3333 14C25.3333 7.74077 20.2592 2.66667 14 2.66667C7.74077 2.66667 2.66667 7.74077 2.66667 14C2.66667 20.2592 7.74077 25.3333 14 25.3333ZM28 14C28 21.732 21.732 28 14 28C6.26801 28 0 21.732 0 14C0 6.26801 6.26801 0 14 0C21.732 0 28 6.26801 28 14Z" fill="white"/>
@@ -35,15 +35,15 @@
                     </svg>
 
 
-                </div>
+                </button>
 
-                <div :style="{ backgroundColor: bgNeutral }"  @click="changeColorNeutral('#cac9c9d9');Neutral(questions[index-1])" class="next-btn cursor-pointer flex justify-center  items-center px-4 py-4">
+                <button :style="{ backgroundColor: bgNeutral }"  @click="changeColorNeutral('#cac9c9d9');Neutral(questions[index-1])" class="next-btn cursor-pointer flex justify-center  items-center px-4 py-4">
                     <label  class="cursor-pointer">Passer</label>
-                </div>
+                </button>
 
             
 
-                <div :style="{ backgroundColor: bgColorSucces }" @click="changeColorSucces('#1C4920');Like(questions[index-1])" class="controll-btn cursor-pointer px-6 max-h-24 h-fit  sm:px-8 py-2  flex gap-2 justify-center items-center flex-wrap">
+                <button :style="{ backgroundColor: bgColorSucces }" @click="changeColorSucces('#1C4920');Like(questions[index-1])" class="controll-btn cursor-pointer px-6 max-h-24 h-fit  sm:px-8 py-2  flex gap-2 justify-center items-center flex-wrap">
                     <label class="cursor-pointer">Pour</label>
                     <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M14 25.3333C20.2592 25.3333 25.3333 20.2592 25.3333 14C25.3333 7.74077 20.2592 2.66667 14 2.66667C7.74077 2.66667 2.66667 7.74077 2.66667 14C2.66667 20.2592 7.74077 25.3333 14 25.3333ZM28 14C28 21.732 21.732 28 14 28C6.26801 28 0 21.732 0 14C0 6.26801 6.26801 0 14 0C21.732 0 28 6.26801 28 14Z" fill="white"/>
@@ -54,7 +54,7 @@
 
 
 
-                </div>
+                </button>
 
 
                
