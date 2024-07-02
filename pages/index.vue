@@ -6,17 +6,17 @@
 
             <HeroSection v-if="page==0" @sendPage="sendPage" />
 
-            <TopBar :key="questionsAnswered" v-if="page!==0" :pageIndex="page" :parentIndex="index" :maxlength="data.length"/>
+            <TopBar class="fixed z-20" :key="questionsAnswered" v-if="page!==0" :pageIndex="page" :parentIndex="index" :maxlength="data.length"/>
 
-            <Questions v-if="page==1" @sendPage="sendPage"  @sendIndex="sendIndex" @sendQuestionsAnswered="sendQuestionsAnswered" :parentIndex="index" :data="data" />
+            <Questions class="pb-10 mt-24 relative  z-10 " v-if="page==1" @sendPage="sendPage"  @sendIndex="sendIndex" @sendQuestionsAnswered="sendQuestionsAnswered" :parentIndex="index" :data="data" />
 
-            <QuestionsList  v-if="page==2"/>
+            <QuestionsList  class="relative mt-24  z-10"   v-if="page==2"/>
 
-            <Resultats :key="index" :maxlength="data.length"  v-if="page==3"/>
+            <Resultats class="mb-20 relative mt-24 z-10"  :key="index" :maxlength="data.length"  v-if="page==3"/>
 
-            <Apropos v-if="page==4"/>
+            <Apropos class="relative  z-10 mt-20 mb-20" v-if="page==4"/>
 
-            <Footer v-if="page!==0" :key="questionsAnswered+'----'+page" @sendPage="sendPage" />
+            <Footer class="fixed z-20" v-if="page!==0" :key="questionsAnswered+'----'+page" @sendPage="sendPage" />
 
 
 

@@ -15,7 +15,7 @@
                 </div>
 
 
-                <div class="swipe-btns px-1 sm:px-2 mt-10  pb-6 flex justify-center items-center  gap-1 xs:gap-4 sm:gap-8">
+                <div class="swipe-btns px-1 sm:px-2 mt-10  mb-10 pb-6 flex justify-center items-center  gap-1 xs:gap-4 sm:gap-8">
 
                         <div :class="{ Dislike: Question.Status=='Dislike' }"  @click="Dislike(Question)"  class="controll-btn notSelected cursor-pointer px-6 max-h-24 h-fit sm:px-8  py-2 flex gap-2 justify-center items-center flex-wrap ">
                             <label class="cursor-pointer">Contre</label>

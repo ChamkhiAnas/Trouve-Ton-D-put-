@@ -136,7 +136,7 @@ Questions.value=JSON.parse(localStorage.getItem('QuestionsList')) || [];
         background-position: center;
         position: relative;
         max-height: 8rem;
-
+        position: fixed;
         background-blend-mode: luminosity;
 
     }

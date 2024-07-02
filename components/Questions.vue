@@ -21,7 +21,7 @@
         </div>
 
 
-        <div class="swipe-btns px-1 sm:px-2 mt-10  pb-6 flex justify-center items-center  gap-1 xs:gap-4 sm:gap-8">
+        <div class="swipe-btns px-1 sm:px-2 mt-10 mb-10  pb-6 flex justify-center items-center  gap-1 xs:gap-4 sm:gap-8">
 
                 <div :style="{ backgroundColor: bgColorError }"  @click="changeColorError('#7D1A1A');Dislike(questions[index-1])" @mousedown="changeColorError('#7D1A1A')" @mouseup="changeColorError('#7D1A1A')" class="controll-btn cursor-pointer px-6 max-h-24 h-fit sm:px-8  py-2 flex gap-2 justify-center items-center flex-wrap ">
                     <label class="cursor-pointer">Contre</label>
