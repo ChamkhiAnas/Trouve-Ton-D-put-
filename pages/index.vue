@@ -111,6 +111,19 @@ data.value=sortedRecords
 
 
 
+let grouped = {};
+
+
+data.value.forEach(item => {
+  let theme = item['Thème'];
+  if (!grouped[theme]) {
+    grouped[theme] = [];
+  }
+  grouped[theme].push(item);
+});
+
+
+
 
 
 </script>

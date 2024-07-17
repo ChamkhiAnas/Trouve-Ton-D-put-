@@ -4,9 +4,10 @@
             <div class="question py-10 max-w-6xl m-0 m-auto pt-8">
 
                 <div class="question-card  py-10 px-4 flex flex-col xs:px-8  justify-center w-11/12 m-0 m-auto mt-8">
+                  
 
                     <div class="badge-type-question max-w-7xl py-2 px-6 ml-2">
-                        <p>{{ Question.Thème }}</p>
+                        <p>{{ Question.Thème }} </p>
                     </div>
                     <h1 class="px-4 mt-4">{{ Question.Question }}</h1>
 

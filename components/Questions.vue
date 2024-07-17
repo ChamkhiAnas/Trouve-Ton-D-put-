@@ -8,6 +8,17 @@
        
 
 
+        <form  class=" mt-4    justify-center w-11/12 m-0 m-auto">
+        <select id="countries" style="background-color: #373737;" class=" border-transparent rounded-xl py-4 px-8 text-gray-900 text-sm    block w-full p-2.5    dark:text-white  ">
+            <option value="US">United States</option>
+            <option value="CA">Canada</option>
+            <option value="FR">France</option>
+            <option value="DE">Germany</option>
+        </select>
+        </form>
+
+
+
 
 
         <div class="question-card py-8 px-4 flex flex-col xs:px-8  justify-center w-11/12 m-0 m-auto mt-8">
@@ -265,12 +276,19 @@ const changeColorNeutral=(value)=>{
     background-color: $secondary;
     color: white;
 
+    #countries{
+    font-family:  $P-Medium !important;
+    font-size: calc(0.8rem + 0.3vh)
+    }
+
     .question-card{
-    min-height: 50vh;
+    min-height: 45vh;
     height: fit-content;
     background-color: $forground;   
     border-radius:2.5rem;
     }
+
+    
 
     // background-color: rgb(202, 201, 201);
 
