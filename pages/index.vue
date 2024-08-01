@@ -46,7 +46,6 @@ localStorage.getItem('index')==null ? localStorage.setItem('index', 1) : "";
 
 localStorage.getItem('Page')==null ? localStorage.setItem('Page', 0) : "";
 
-localStorage.getItem('QuestionsList')==null ? localStorage.setItem('QuestionsList', JSON.stringify([])) : "";
 
 
 
@@ -121,6 +120,23 @@ data.value.forEach(item => {
   }
   grouped[theme].push(item);
 });
+
+
+
+data.value = Object.keys(grouped).map(theme => ({
+  [theme]: grouped[theme] 
+}));
+
+
+data.value.forEach(item=>{
+  item["answered"]=0
+  item["maxLength"]=item[Object.keys(item)[0]].length
+})
+
+
+
+localStorage.getItem('QuestionsList')==null ? localStorage.setItem('QuestionsList', JSON.stringify([])) : "";
+
 
 
 
